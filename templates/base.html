@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyurSkin.AI</title>
+    <link rel="icon" href="/static/images/logocropped.jpg" type="image/jpg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo-img">
+                <img src="/static/images/logo.jpg" alt="Logo"> <!-- Adjust the path to your logo image -->
+            </div>
+            <div class="logo">AyurSkin.AI</div>
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/prediction">Prediction</a>
+                <a href="/healthfoods">Healthy Foods</a>
+                <a href="/skincare">Skin Care</a>
+                <input type="text" class="search-bar" id="search-bar" placeholder="Enter your Disease...">
+            </div>
+        </div>
+    </nav>
+    <!-- Dynamic Content -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <script>
+        document.getElementById('search-bar').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const query = encodeURIComponent(this.value.trim());
+                if (query) {
+                    window.open(`https://www.google.com/search?q=${query}`, '_blank'); // Opens in a new tab
+                    
+                    // Clear the search bar after opening the new tab
+                    this.value = '';
+                }
+            }
+        });
+        
+        
+    </script>
+</body>
+</html>

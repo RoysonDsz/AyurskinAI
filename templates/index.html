@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+    <h1 class="quote">Prevention is better than cure</h1>
+    <a href="/prediction" class="btn-prediction">Try Prediction Tool</a>
+    <div id="chatbot-icon" class="chatbot-icon">
+        <img src="/static/images/logocropped.jpg" alt="Chat with us">
+    </div>
+</div>
+<script>
+document.getElementById('chatbot-icon').addEventListener('click', function() {
+    // You can open a chatbot UI (like a modal or redirect to a chatbot system)
+    // For simplicity, opening a new tab or iframe with chatbot functionality
+    window.open('/chatbot', '_blank');
+});
+</script>
+
+{% endblock %}

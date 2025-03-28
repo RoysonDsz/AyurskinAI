@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="prediction">
+    <h2>Skin Disease Prediction</h2>
+    <form id="upload-form" action="/predict" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <div class="button-group">
+            <button type="submit" id="predict-button" class="button">Predict</button>
+            <button type="button" id="remedies-button" class="button" disabled>Remedies</button>
+        </div>
+    </form>
+
+    <div id="loading" class="loading" style="display: none;">
+        <p>Processing...</p>
+    </div>
+
+    <div id="result" class="result">
+        <!-- Prediction results will appear here -->
+    </div>
+
+    <div id="remedies-section" class="remedies-section" style="display: none;">
+        <h3 class="section-title">Remedies</h3>
+        <div id="remedies-content" class="remedies-content"></div>
+    </div>
+
+    <div id="disease-info" class="disease-info" style="display: none;">
+        <h3>Want to know more about this disease?</h3>
+        <button id="info-button" class="button">Learn More</button>
+    </div>
+</section>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .prediction {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 30px;
+        border: 2px solid #007BFF;
+        border-radius: 15px;
+        background-color: #f0f8ff;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 28px;
+        color: #007BFF;
+    }
+
+    input[type="file"] {
+        display: block;
+        margin: 30px auto;
+        font-size: 18px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    
+    .button {
+        padding: 15px 25px;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        background-color: #007BFF;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s;
+    }
+
+    .button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    .button:hover:not(:disabled) {
+        background-color: #0056b3;
+    }
+
+    .loading {
+        text-align: center;
+        color: #007BFF;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+
+    .result {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .result p {
+        margin: 15px 0;
+    }
+
+    .result img {
+        margin-top: 15px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        max-width: 300px;
+    }
+
+    #remedies-section {
+        background: linear-gradient(to right, #ffecd2, #1560bd);
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.8rem;
+        color: #ff6347;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .remedies-content {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2rem;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .remedies-content p {
+        margin-bottom: 10px;
+    }
+
+    .disease-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .disease-info .button {
+        background-color: #ff6347;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        const formData = new FormData(this); // Create a FormData object
+        const predictButton = document.getElementById('predict-button');
+        const remediesButton = document.getElementById('remedies-button');
+        const loadingDiv = document.getElementById('loading');
+        const resultDiv = document.getElementById('result');
+        const diseaseInfoDiv = document.getElementById('disease-info');
+    
+        // Reset UI states
+        predictButton.disabled = true;
+        remediesButton.disabled = true;
+        resultDiv.innerHTML = '';
+        loadingDiv.style.display = 'block';
+    
+        try {
+            // Make a POST request to the backend
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const result = await response.json(); // Parse the JSON response
+    
+            if (response.ok) {
+                // Display the prediction result
+                resultDiv.innerHTML = `
+                    <p><strong>Predicted Class:</strong> ${result.predicted_class}</p>
+                    <p><strong>Confidence:</strong> ${result.confidence}</p>
+                    <img src="${result.image_url}" alt="Uploaded Image" width="200">
+                `;
+    
+                // Enable Remedies button and store predicted class
+                remediesButton.disabled = false;
+                remediesButton.dataset.predictedClass = result.predicted_class;
+    
+                // Show disease info button
+                diseaseInfoDiv.style.display = 'block';
+            } else {
+                // Display an error message
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${result.error}</p>`;
+            }
+        } catch (error) {
+            console.error('Error during prediction:', error);
+            resultDiv.innerHTML = `<p style="color: red;">An error occurred during prediction.</p>`;
+        } finally {
+            loadingDiv.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('remedies-button').addEventListener('click', async function () {
+        const predictedClass = this.dataset.predictedClass;
+        const remediesSection = document.getElementById('remedies-section');
+        const remediesContent = document.getElementById('remedies-content');
+    
+        try {
+            const response = await fetch('/remedies', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ predicted_class: predictedClass })
+            });
+    
+            const remediesResult = await response.json();
+    
+            if (response.ok) {
+                // Build and display remedies
+                const remediesList = Object.entries(remediesResult.remedies)
+                    .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+                    .join('');
+                remediesContent.innerHTML = remediesList;
+    
+                // Display the remedies section with heading
+                remediesSection.style.display = 'block';
+                remediesSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                remediesContent.innerHTML = `<p style="color: red;">Error: ${remediesResult.error}</p>`;
+            }
+        } catch (error) {
+            console.error('Error fetching remedies:', error);
+            remediesContent.innerHTML = `<p style="color: red;">An error occurred while fetching remedies.</p>`;
+        }
+    });
+    
+    document.getElementById('disease-info').addEventListener('click', function () {
+        const predictedClass = document.getElementById('remedies-button').dataset.predictedClass;
+        const diseaseInfoURL = `https://www.google.com/search?q=${predictedClass}+disease+information`;
+        window.open(diseaseInfoURL, '_blank');
+    });
+    
+</script>
+{% endblock %}

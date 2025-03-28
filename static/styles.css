@@ -1,0 +1,581 @@
+.navbar {
+    background: #02a6c6; /* Dark theme */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.886);
+    border-radius: 10px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background-color: #007BFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    animation: bounceIn 1s ease-in-out; /* Bounce-in animation */
+}
+
+#chatbot-icon img {
+    width: 60px;
+    height: 60px;
+}
+
+#chatbot-icon::before {
+    content: 'Hello, I\'m your assistant! Try me.';
+    display: none; /* Hide the tooltip initially */
+    position: absolute;
+    bottom: 80px; /* Position below the icon */
+    right: 0;
+    background-color: #007BFF;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+#chatbot-icon:hover::before {
+    display: block;  /* Show the tooltip on hover */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation for the chatbot icon */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3) translateY(100px); /* Start small and below */
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) translateY(10px); /* Slightly larger and up */
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) translateY(0); /* Reset to original size and position */
+        opacity: 1;
+    }
+}
+
+
+/* Logo Section */
+.logo-img img {
+    max-height: 50px; /* Adjust logo size */
+    width: 50px; /* Set a specific width to make it a perfect circle */
+    height: 50px; /* Set a specific height to maintain a square shape */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensures the image doesn't stretch and maintains its aspect ratio */
+    border: 3px solid black; /* Add black border around the circular logo */
+    margin-right: 10px; /* Add right margin to create spacing between logo image and text */
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    margin: 0; /* Remove margin around the logo */
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+}
+
+
+/* Main Content Styling */
+/* Main Content Styling */
+.main-content {
+    text-align: center;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-image: url('/static/images/background-main.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Ensures the background stays still */
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1; /* Ensures the content is layered above the background */
+    border-radius: 20px;
+}
+
+/* Quote Styling */
+.quote {
+    font-size: 5em; /* Very large text size */
+    color:white; /* White color for contrast */
+    font-family: 'Bradley Hand', cursive;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-in-out; /* Animation for quote */
+}
+
+/* Button Styling */
+.btn-prediction {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    background-color: #02a6c6; /* Soft coral color for button */
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-prediction:hover {
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in Animation for the Quote */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.health-foods {
+    background-image: none;
+    background-color: #02a6c6; /* Bright blue */
+    background-size: cover; /* Ensures the background image (if any) covers the entire container */
+    font-family: Arial, sans-serif; /* Example font */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add padding for inner spacing */
+    color: white; /* White text color for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for a stylish look */
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.navbar-links a:hover {
+    background: #565656;
+    color: #fff;
+}
+
+.search-bar {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    margin-left: 15px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+    }
+}
+
+
+/* Section Styles */
+.health-foods {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+}
+
+.health-foods h1 {
+    font-size: 2.5em;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+}
+
+.health-foods p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* Food List Styles */
+.food-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.food-item {
+    width: 300px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.food-item img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.food-item h3 {
+    font-size: 1.5em;
+    color: #264653;
+    margin-bottom: 10px;
+}
+
+.food-item p {
+    font-size: 1em;
+    color: #6d6875;
+}
+
+/* Basic reset for margins and padding */
+.navbar {
+    background: #02a6c6; /* Dark theme */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.886);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.health-foods {
+    background-image: none;
+    background-color: #02a6c6; /* Bright blue */
+    background-size: cover; /* Ensures the background image (if any) covers the entire container */
+    font-family: Arial, sans-serif; /* Example font */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add padding for inner spacing */
+    color: white; /* White text color for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for a stylish look */
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 10px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.navbar-links a:hover {
+    background: #565656;
+    color: #fff;
+}
+
+.search-bar {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    font-size: 1rem;
+    margin-left: 15px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+    }
+}
+
+/* Centered About Section */
+.about-section {
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-radius: 10px;
+    max-width: 1200px;
+    width: 80%;
+    margin: 0 auto;
+    animation: fadeIn 1s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.about-container {
+    max-width: 1100px;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* About Highlights */
+.about-highlights {
+    margin-top: 50px;
+    line-height: 1.8;
+}
+
+.about-highlights ul {
+    list-style-type: none;
+    padding: 20;
+}
+
+.about-highlights li {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* Image Section */
+.about-image {
+    margin-top: 30px;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.05);
+}
+
+/* About Team Section */
+.about-team {
+    margin-top: 40px;
+}
+
+.about-footer {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    background-color: #ff8c00;
+    color: #fff;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #e67e00;
+    transform: scale(1.05);
+}
+
+.button:active {
+    transform: scale(1);
+}
+
+/* Keyframe Animation for Fade In */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+/* Button Styles */
+.button {
+    display: inline-block;
+    background-color: #ff8c00;
+    color: #fff;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #e67e00;
+    transform: scale(1.05);
+}
+
+.button:active {
+    transform: scale(1);
+}
+
+/* Keyframe Animation for Fade In */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+/* Section Styles */
+.health-foods {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+}
+
+.health-foods h1 {
+    font-size: 2.5em;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+}
+
+.health-foods p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* Food List Styles */
+.food-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.food-item {
+    width: 300px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.food-item img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.food-item h3 {
+    font-size: 1.5em;
+    color: #264653;
+    margin-bottom: 10px;
+}
+
+.food-item p {
+    font-size: 1em;
+    color: #6d6875;
+}
+

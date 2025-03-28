@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f9ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .skincare-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        .tips-section, .home-remedies-section {
+            margin: 40px 0;
+        }
+
+        .treatment-card {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .treatment-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .treatment-info {
+            flex: 1;
+            padding-left:50px;
+        }
+
+        .treatment-info h3 {
+            margin: 0 0 10px;
+            color: #0056b3;
+            font-size: 30px;
+        }
+
+        .treatment-info p {
+            margin: 0;
+            line-height: 1.5;
+            font-size:larger;
+            
+        }
+
+        .additional-tips {
+            background-color: #eaf4ff;
+            border: 1px solid #007BFF;
+            border-radius: 10px;
+            padding-left: 50px;
+            margin-top: 20px;
+            
+        }
+
+        .additional-tips h2{
+            font-size:30px;
+        }
+
+        .additional-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .additional-tips ul li {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .additional-tips ul li::before {
+            content: "\2022"; /* Unicode for a bullet point */
+            color: #007BFF;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        @media (max-width: 768px) {
+            .treatment-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .treatment-image {
+                width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+
+    <div class="skincare-container">
+        <h1>Skin Care Tips and Routine</h1>
+
+        <!-- Daily Skin Care Routine Section -->
+        <div class="tips-section">
+            <h2>Daily Skin Care Routine</h2>
+
+            <div class="treatment-card">
+                <img src="/static/images/cleansing.avif" alt="Cleanse" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Cleanse</h3>
+                    <p>Wash your face twice a day with a gentle cleanser to remove dirt and impurities.</p>
+                </div>
+            </div>
+
+            <div class="treatment-card">
+                <img src="/static/images/exfoliate.avif" alt="Exfoliate" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Exfoliate</h3>
+                    <p>Use a mild exfoliator 2-3 times a week to remove dead skin cells and promote skin renewal.</p>
+                </div>
+            </div>
+
+            <div class="treatment-card">
+                <img src="/static/images/mositurize.jpg" alt="Moisturize" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Moisturize</h3>
+                    <p>Apply a moisturizer suitable for your skin type to keep your skin hydrated and soft.</p>
+                </div>
+            </div>
+
+            <div class="treatment-card">
+                <img src="/static/images/sunprotection.jpeg" alt="Sun Protection" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Sun Protection</h3>
+                    <p>Always use sunscreen with at least SPF 30 before stepping out to protect your skin from UV damage.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Remedies Section -->
+        <div class="home-remedies-section">
+            <h2>Home Remedies for Healthy Skin</h2>
+
+            <div class="treatment-card">
+                <img src="/static/images/honeylemon.jpeg" alt="Honey and Lemon Mask" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Honey and Lemon Mask</h3>
+                    <p>Mix 1 tbsp of honey with a few drops of lemon juice. Apply to your face for 15 minutes before washing off.</p>
+                </div>
+            </div>
+
+            <div class="treatment-card">
+                <img src="/static/images/aloevera.avif" alt="Aloe Vera Gel" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Aloe Vera Gel</h3>
+                    <p>Apply fresh aloe vera gel to soothe and hydrate your skin, especially for sunburns and irritation.</p>
+                </div>
+            </div>
+
+            <div class="treatment-card">
+                <img src="/static/images/turmericyogurt.jpeg" alt="Turmeric and Yogurt Mask" class="treatment-image">
+                <div class="treatment-info">
+                    <h3>Turmeric and Yogurt Mask</h3>
+                    <p>Mix 1 tsp turmeric with 2 tbsp yogurt, apply to your face, and rinse after 20 minutes for glowing skin.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Tips Section -->
+        <div class="additional-tips">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Avoid smoking and limit alcohol consumption for better skin health.</li>
+                <li>Incorporate a diet rich in fruits, vegetables, and omega-3 fatty acids for glowing skin.</li>
+                <li>Keep stress levels low with yoga, meditation, or exercise to prevent skin issues.</li>
+                <li>Wash makeup brushes regularly to avoid bacterial buildup and prevent acne.</li>
+                <li>Consult a dermatologist for persistent skin issues that don't improve with home care.</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
